@@ -1,4 +1,15 @@
 {-# LANGUAGE DeriveFunctor, DeriveFoldable, DeriveTraversable, DeriveDataTypeable, Rank2Types #-}
+-----------------------------------------------------------------------------
+-- |
+-- Module      :  Data.BoundingBox.Dim2
+-- Copyright   :  (C) 2014 Fumiaki Kinoshita
+-- License     :  BSD-style (see the file LICENSE)
+--
+-- Maintainer  :  Fumiaki Kinoshita <fumiexcel@gmail.com>
+-- Stability   :  provisional
+-- Portability :  non-portable
+-- The type and accessors for 2D bounding boxes
+----------------------------------------------------------------------------
 module Data.BoundingBox.Dim2 (
     BoundingBox(..)
     , _TLBR
