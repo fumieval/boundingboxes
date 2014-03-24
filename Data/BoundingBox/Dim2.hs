@@ -13,6 +13,7 @@
 module Data.BoundingBox.Dim2 (
     BoundingBox(..)
     , inBoundingBox
+    , intersect
     , _TLBR
     , _BLTR
     , _Corners
@@ -32,6 +33,18 @@ data BoundingBox a = BoundingBox a a a a deriving (Show, Eq, Ord, Functor, Folda
 -- | Determine whether the given point is in the 'BoundingBox'.
 inBoundingBox :: Ord a => V2 a -> BoundingBox a -> Bool
 inBoundingBox (V2 x y) (BoundingBox x0 y0 x1 y1) = x0 <= x && x <= x1 && y0 <= y && y <= y1
+
+-- | Intersection between two boundingboxes.
+intersect :: Ord a => BoundingBox a -> BoundingBox a -> Maybe (BoundingBox a)
+intersect (BoundingBox x0 y0 x1 y1) (BoundingBox x2 y2 x3 y3)
+    | x4 >= x5 = Nothing
+    | y4 >= y5 = Nothing
+    | otherwise = Just $ BoundingBox x4 y4 x5 y5
+    where
+        x4 = max x0 x2
+        y4 = max y0 y2
+        x5 = min x1 x3
+        y5 = min y1 y3
 
 -- | The type of reference points.
 -- @
