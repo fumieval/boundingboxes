@@ -12,8 +12,10 @@
 ----------------------------------------------------------------------------
 module Data.BoundingBox.Dim2 (
     BoundingBox(..)
+    , inBoundingBox
     , _TLBR
     , _BLTR
+    , _Corners
     , Reference(..)
     , position
     , size
@@ -23,8 +25,13 @@ import Linear
 import Control.Lens
 import Data.Foldable
 import Data.Typeable
+import Control.Applicative
 
 data BoundingBox a = BoundingBox a a a a deriving (Show, Eq, Ord, Functor, Foldable, Traversable, Read, Typeable)
+
+-- | Determine whether the given point is in the 'BoundingBox'.
+inBoundingBox :: Ord a => V2 a -> BoundingBox a -> Bool
+inBoundingBox (V2 x y) (BoundingBox x0 y0 x1 y1) = x0 <= x && x <= x1 && y0 <= y && y <= y1
 
 -- | The type of reference points.
 -- @
@@ -56,6 +63,10 @@ _TLBR = iso (\(BoundingBox x0 y0 x1 y1) -> (V2 x0 y0, V2 x1 y1)) (\(V2 x0 y0, V2
 -- @
 _BLTR :: Iso' (BoundingBox a) (V2 a, V2 a)
 _BLTR = iso (\(BoundingBox x0 y0 x1 y1) -> (V2 x0 y1, V2 x1 y0)) (\(V2 x0 y1, V2 x1 y0) -> BoundingBox x0 y0 x1 y1)
+
+_Corners :: Traversal' (BoundingBox a) (V2 a)
+_Corners f (BoundingBox x0 y0 x1 y1) = go <$> f (V2 x0 y0) <*> f (V2 x1 y0) <*> f (V2 x1 y1) <*> f (V2 x0 y1) where
+    go (V2 x0' _) (V2 _ y1') (V2 x2' _) (V2 _ y3') = BoundingBox x0' y1' x2' y3'
 
 position :: Fractional a => Reference -> Lens' (BoundingBox a) (V2 a)
 position ref f (BoundingBox x0 y0 x1 y1) = f (V2 x0 y0 + offset)
