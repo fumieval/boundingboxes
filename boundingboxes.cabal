@@ -14,7 +14,7 @@ build-type:          Simple
 cabal-version:       >=1.10
 
 library
-  exposed-modules:     Data.BoundingBox.Dim2
+  exposed-modules:     Data.BoundingBox, Data.BoundingBox.Dim2
   -- other-modules:       
   other-extensions:    DeriveFunctor, DeriveFoldable, DeriveTraversable, DeriveDataTypeable, Rank2Types
   build-depends:       base == 4.*, linear >= 1.0, lens >= 3.8 && < 5
