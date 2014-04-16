@@ -35,3 +35,18 @@ test-suite properties
     , boundingboxes
   main-is: properties.hs
   hs-source-dirs: tests
+
+test-suite propertiesDim2
+  type: exitcode-stdio-1.0
+  default-language:    Haskell2010
+  build-depends: base
+    , linear
+    , lens
+    , QuickCheck >=2.4
+    , test-framework-th >= 0.2
+    , test-framework
+    , test-framework-quickcheck2 >= 0.2
+    , random
+    , boundingboxes
+  main-is: properties-Dim2.hs
+  hs-source-dirs: tests
