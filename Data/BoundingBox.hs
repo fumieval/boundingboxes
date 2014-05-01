@@ -12,7 +12,6 @@
 {-# LANGUAGE DeriveFunctor, DeriveFoldable, DeriveTraversable, Rank2Types #-}
 module Data.BoundingBox where
 
-import Linear
 import Control.Lens
 import Data.Foldable
 import Data.Typeable
