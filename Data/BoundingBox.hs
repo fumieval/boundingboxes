@@ -28,6 +28,11 @@ instance Applicative f => Applicative (Box f) where
     Box f g <*> Box a b = Box (f <*> a) (g <*> b)
     {-# INLINE (<*>) #-}
 
+instance Monad f => Monad (Box f) where
+    return a = Box (return a) (return a)
+    {-# INLINE return #-}
+    Box f g >>= k = Box (f >>= \x -> let Box p _ = k x in p) (g >>= \x -> let Box _ q = k x in q)
+
 -- | check whether the point is in the box.
 isInside :: (Applicative f, Foldable f, Ord a) => f a -> Box f a -> Bool
 isInside v (Box p q) = Foldable.and (liftA2 (<=) p v) && Foldable.and (liftA2 (<=) v q)
