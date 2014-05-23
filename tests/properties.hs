@@ -27,7 +27,7 @@ instance Arbitrary a => Arbitrary (V2 a) where
 prop_resize bb (getReference -> ref) sz = nearZero $ bb ^. position ref - bb' ^. position ref where
     bb' = bb & size ref .~ getPositive sz :: Box V2 Float
 
-prop_rearrange (getReference -> ref) bb pos = nearZero $ bb ^. size 0 - bb' ^. size 0 where
+prop_rearrange (getReference -> ref) bb pos = norm (bb ^. size 0 - bb' ^. size 0) < 10e-4 where
     bb' = bb & position ref .~ pos :: Box V2 Float
 
 prop_construct (getReference -> ref) pos (getPositive -> sz) = nearZero (bb ^. size 0 - sz)

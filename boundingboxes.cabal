@@ -1,5 +1,5 @@
 name:                boundingboxes
-version:             0.1.1
+version:             0.2
 synopsis:            The type for 2D bounding box
 -- description:         
 homepage:            https://github.com/fumieval/boundingboxes
