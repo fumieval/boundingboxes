@@ -1,6 +1,6 @@
 name:                boundingboxes
 version:             0.2
-synopsis:            The type for 2D bounding box
+synopsis:            Boundingboxes for arbitrary vectors
 -- description:         
 homepage:            https://github.com/fumieval/boundingboxes
 license:             BSD3

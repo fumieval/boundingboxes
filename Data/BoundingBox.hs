@@ -20,6 +20,7 @@ import Data.Foldable as Foldable
 import Data.Traversable as Traversable
 
 -- | The type of bounding box for arbitrary vector @f@.
+-- The functions for this type assume that @f@ is a "zipping" 'Applicative'.
 data Box f a = Box (f a) (f a) deriving (Show, Eq, Ord, Functor, Foldable, Traversable, Read)
 
 instance Applicative f => Applicative (Box f) where
