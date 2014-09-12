@@ -1,13 +1,13 @@
 name:                boundingboxes
-version:             0.2
-synopsis:            Boundingboxes for arbitrary vectors
+version:             0.2.1
+synopsis:            A generic boundingbox for an arbitrary vector
 -- description:         
 homepage:            https://github.com/fumieval/boundingboxes
 license:             BSD3
 license-file:        LICENSE
 author:              Fumiaki Kinoshita
 maintainer:          fumiexcel@gmail.com
--- copyright:           
+copyright:           Copyright (c) 2014 Fumiaki Kinoshita
 category:            Data
 build-type:          Simple
 -- extra-source-files:  
