@@ -38,9 +38,17 @@ instance Monad f => Monad (Box f) where
 isInside :: (Applicative f, Foldable f, Ord a) => f a -> Box f a -> Bool
 isInside v (Box p q) = Foldable.and (liftA2 (<=) p v) && Foldable.and (liftA2 (<=) v q)
 
+-- | Extend each side.
+inflate :: (Functor f, Num a) => a -> Box f a -> Box f a
+inflate t (Box p q) = Box (fmap (subtract t) p) (fmap (+t) q)
+
 -- | Returns True if the bounding box is valid.
 isCanonical :: (Applicative f, Foldable f, Ord a) => Box f a -> Bool
 isCanonical (Box p q) = Foldable.and (liftA2 (<=) p q)
+
+-- | Calculate an union between two boundingboxes.
+union :: (Applicative f, Ord a) => Box f a -> Box f a -> Box f a
+union (Box p q) (Box r s) = Box (liftA2 min p r) (liftA2 max q s)
 
 -- | Calculate an intersect between two boundingboxes.
 intersect :: (Applicative f, Ord a) => Box f a -> Box f a -> Box f a
