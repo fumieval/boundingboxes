@@ -63,7 +63,7 @@ sizePos k = iso f g where
     f (Box p q) = (liftA2 (-) q p, (+) <$> liftA2 (*) (fmap (1-) k) p <*> liftA2 (*) k q)
     g (s, v) = Box ((-) <$> v <*> liftA2 (*) k s) ((+) <$> v <*> liftA2 (*) (fmap (1-) k) s)
 
--- | The accessor for the position on the given reference. Usually the reference point 
+-- | The accessor for the position on the given reference. Usually the reference point
 position :: (Applicative f, Num a) => f a -> Lens' (Box f a) (f a)
 position ref = sizePos ref . _2
 
